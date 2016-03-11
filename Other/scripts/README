@@ -1,0 +1,7 @@
+Run the server:
+$ python ~/Google\ Drive/unity/VMail/Other/scripts/tokengenerator.py 8003
+
+Visit the url below so we can generate a token:
+
+
+The server should output a valid gmail access token.
