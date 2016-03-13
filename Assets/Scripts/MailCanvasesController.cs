@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using System.Collections;
 using EmailData = EmailUtility.EmailData;
 
+// This class controls the main email scroller the user will see.
+// TODO(nader): This class should generate its panels programmatically
+// like MailPreviewCanvasesController.
 public class MailCanvasesController : MonoBehaviour {
+	// When our EmailList property is set, update the pages in the scroller
+	// to actually contain the text.
 	private IList<EmailData> emailList;
 	public IList<EmailData> EmailList {
 		get {
@@ -16,6 +21,7 @@ public class MailCanvasesController : MonoBehaviour {
 		}
 	}
 
+	// Loop through all of this object's children and fill them up with emails.
 	private void fillCanvasesWithEmail(IList<EmailData> emailList) {
 		// We fill up as many canvases as we can with emails. If we have K canvases
 		// and L emails, we want to populat min(K, L).

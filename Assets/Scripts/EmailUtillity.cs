@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using Constants = VMailUtilities.Constants;
 
 public static class EmailUtility {
+	// A simple class that contains the data we'll use to populate a single
+	// email.
 	public class EmailData {
 		public string subject;
 		public string body;
@@ -15,6 +17,7 @@ public static class EmailUtility {
 		}
 	}
 
+	// Clears the email messages in the transform passed in.
 	public static void clearAllText(Transform inputTransform) {
 		foreach (Transform tt in inputTransform) {
 			EmailUtility.setTextRecursively (tt.gameObject, "", "");
@@ -45,7 +48,7 @@ public static class EmailUtility {
 	{
 		// TODO(nader): Soon this will actually fetch from Gmail.
 		// See https://goo.gl/0TN9Hf for instructions on how to use the token
-		// to hit the API. Leaving example of WWW here to show what it'll
+		// to hit the API. Leaving an example of WWW here to show what it'll
 		// look like.
 		//
 		// WWW www = new WWW(url);

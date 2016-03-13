@@ -3,24 +3,30 @@ using System.Collections;
 using System.Collections.Generic;
 using EmailData = EmailUtility.EmailData;
 
+// This class controls the preview scroller the user sees.
 public class MailPreviewCanvasesController : MonoBehaviour {
+	// We programmatically create all of the preview panels from a single
+	// prefab. The radius of the panels is taken from this prefab.
 	public Transform singleCanvasPrefab;
-	public int numPanels = 16;
+	// The number of panels we'll generate.
+	public int numPanels = 8;
 	private IList<Transform> listOfCanvases = new List<Transform>();
 
+	// When the EmailList property is set, fill all the preview panels
+	// with emails.
 	private IList<EmailData> emailList;
 	public IList<EmailData> EmailList {
 		get {
 			return emailList;
 		}
 		set {
-			Debug.Log ("Filling canvases.");
 			emailList = value;					
 			EmailUtility.clearAllText (transform);
 			fillCanvasesWithEmail (emailList);
 		}
 	}
 
+	// Loop through all of this object's children and fill them up with emails.
 	private void fillCanvasesWithEmail(IList<EmailData> emailList) {
 		// We fill up as many canvases as we can with emails. If we have K canvases
 		// and L emails, we want to populat min(K, L).
@@ -35,7 +41,7 @@ public class MailPreviewCanvasesController : MonoBehaviour {
 		}
 	}
 
-	// Use this for initialization
+	// Programmatically generate all of the preview panels.
 	void Start () {
 		float radiansPerTurn = Mathf.PI * 2 / numPanels;
 		float radius = Mathf.Abs(singleCanvasPrefab.localPosition.z);
