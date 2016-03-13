@@ -11,6 +11,15 @@ Send a POST request::
     curl -d "foo=bar&bin=baz" http://localhost
 """
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
+from oauth2client import client
+import httplib2
+
+flow = client.flow_from_clientsecrets(
+    'client_secrets.json',
+    scope='https://www.googleapis.com/auth/gmail.readonly',
+    redirect_uri='http://ec2-52-72-26-24.compute-1.amazonaws.com:8003')
+
+print flow.step1_get_authorize_url()
 
 
 class S(BaseHTTPRequestHandler):
@@ -21,7 +30,8 @@ class S(BaseHTTPRequestHandler):
 
     def do_GET(self):
         self._set_headers()
-        self.wfile.write("<html><body><h1>hi!</h1></body></html>")
+        creds = flow.step2_exchange(self.path.split('=')[1])
+        self.wfile.write("<html><body><h1>Access token: {}</h1></body></html>".format(creds.access_token))
 
     def do_HEAD(self):
         self._set_headers()

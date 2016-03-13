@@ -1,7 +1,14 @@
 Run the server:
 $ python ~/Google\ Drive/unity/VMail/Other/scripts/tokengenerator.py 8003
 
+Install the necessary things:
+pip install ipython
+pip install oauth2client
+sudo apt-get install supervisor
+Copy supervisor_init into /etc/init.d/supervisor after running sudo apt-get install supervisor.
+sudo service supervisor restart
+
+You need to get the URL to your EC2 server from aws.
+
 Visit the url below so we can generate a token:
-
-
-The server should output a valid gmail access token.
+https://accounts.google.com/o/oauth2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fgmail.readonly&redirect_uri=http%3A%2F%2Fec2-52-72-26-24.compute-1.amazonaws.com%3A8003&response_type=code&client_id=844259472691-8h2l09racu6k7gjaf6ug9ql4ete1a1pc.apps.googleusercontent.com&access_type=offline
